@@ -53,11 +53,11 @@ public class CalcServlet extends HttpServlet {
                 switch(key){
                     case "CE":
                         currState = State.W4OP1;
-                        expr = "";
-                        result = "";
+                        cleanExprField();
+                        cleanResultField();
                         break;
                     case "C":
-                        expr = "";
+                        cleanExprField();
                         break;
                     case "D":
                         if(!expr.equals("")){
@@ -77,7 +77,7 @@ public class CalcServlet extends HttpServlet {
                     case ".":
                         expr = expr.equals("") ? key : (expr + key);
                         if(currState == State.W4OP1){
-                            result = "";
+                            cleanResultField();
                         }
                         break;
                     case "+":
@@ -88,14 +88,14 @@ public class CalcServlet extends HttpServlet {
                             op1 = Double.parseDouble(expr);
                             operation = key;
                             result = String.valueOf(op1) + operation;
-                            expr = "";
+                            cleanExprField();
                             currState = State.W4OP2;
                         } else {
                             op2 = Double.parseDouble(expr);
                             calculate(); // нужно ли здесь писать this.calculate()  для лучшей читаемости?
                             operation = key;
                             result = String.valueOf(op1) + operation;
-                            expr = "";
+                            cleanExprField();
                         }
                         break;
                     case "=":
@@ -103,12 +103,12 @@ public class CalcServlet extends HttpServlet {
                             op2 = Double.parseDouble(expr);
                             calculate();
                             result = String.valueOf(op1);
-                            expr = "";
+                            cleanExprField();
                             currState = State.W4OP1;
                         }
                 }
             } catch (NumberFormatException nfe) {
-                    expr = "";
+                    cleanExprField();
                     result = "Invalid expression";
                     currState = State.W4OP1;
             }
@@ -120,6 +120,20 @@ public class CalcServlet extends HttpServlet {
         writePage(resp.getWriter());
 
 
+    }
+
+    /**
+     * clean field for expression
+     */
+    private void cleanExprField(){
+        expr = "";
+    }
+
+    /**
+     * clean field for expression
+     */
+    private void cleanResultField(){
+        result = "";
     }
 
     /**
