@@ -7,7 +7,7 @@
   <groupId>webapps.g0rba4ev</groupId>
   <artifactId>webCalc</artifactId>
   <version>1.0-SNAPSHOT</version>
-  <packaging>jar</packaging>
+  <packaging>war</packaging>
 
   <name>webCalc Maven Webapp</name>
   <!-- FIXME change it to the project's website -->

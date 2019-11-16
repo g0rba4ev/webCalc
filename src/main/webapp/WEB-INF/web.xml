@@ -10,15 +10,13 @@
   <display-name>Calculator</display-name>
 
   <servlet>
-    <servlet-name>MyServlet</servlet-name>
-    <servlet-class>CalcServlet</servlet-class>
+    <servlet-name>CalcServlet</servlet-name>
+    <servlet-class>apps.g0rba4ev.CalcServlet</servlet-class>
   </servlet>
 
   <servlet-mapping>
-    <servlet-name>MyServlet</servlet-name>
+    <servlet-name>CalcServlet</servlet-name>
     <url-pattern>/</url-pattern>
   </servlet-mapping>
-
-
 
 </web-app>
