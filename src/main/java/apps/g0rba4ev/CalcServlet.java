@@ -17,7 +17,7 @@ public class CalcServlet extends HttpServlet {
     /**
      * field for storing (and output) the expression entered by the user
      */
-    private String expr = "";
+    private String expr = ""; // empty state of expression
     /**
      * field for storing (and output) the expression entered by the user and the calculation result
      */
@@ -60,9 +60,16 @@ public class CalcServlet extends HttpServlet {
                         cleanExprField();
                         break;
                     case "D":
-                        if(!expr.equals("")){
+                        if(!exprIsEmpty()){
                             expr = expr.substring(0, expr.length()-1);
                         }
+                        break;
+                    case "+/-":
+                        if(exprIsEmpty()){
+                            expr = "-";
+                            break;
+                        }
+                        expr = expr.charAt(0) == '-' ? expr = expr.substring(1) : "-" + expr;
                         break;
                     case "0":
                     case "1":
@@ -75,7 +82,7 @@ public class CalcServlet extends HttpServlet {
                     case "8":
                     case "9":
                     case ".":
-                        expr = expr.equals("") ? key : (expr + key);
+                        expr = exprIsEmpty() ? key : (expr + key);
                         if(currState == State.W4OP1){
                             cleanResultField();
                         }
@@ -106,6 +113,7 @@ public class CalcServlet extends HttpServlet {
                             cleanExprField();
                             currState = State.W4OP1;
                         }
+                        break;
                 }
             } catch (NumberFormatException nfe) {
                     cleanExprField();
@@ -122,6 +130,13 @@ public class CalcServlet extends HttpServlet {
 
     }
 
+    /**
+     * check, is expr empty now or not
+     * @return boolean
+     */
+    private boolean exprIsEmpty(){
+        return expr.equals("");
+    }
     /**
      * clean field for expression
      */
@@ -198,9 +213,9 @@ public class CalcServlet extends HttpServlet {
         out.println("       <input type=\"submit\" style=\"" + ButtonStyle + "\" name=\"key\" value=\"3\">");
         out.println("       <input type=\"submit\" style=\"" + ButtonStyle + "\" name=\"key\" value=\"+\">");
         out.println("       <br />");
-        out.println("       <input type=\"submit\" style=\"" + ButtonStyle + "\" name=\"key\" value=\".\">");
+        out.println("       <input type=\"submit\" style=\"" + ButtonStyle + "\" name=\"key\" value=\"+/-\">");
         out.println("       <input type=\"submit\" style=\"" + ButtonStyle + "\" name=\"key\" value=\"0\">");
-        out.println("       <input type=\"submit\" style=\"" + ButtonStyle + "\" name=\"key\" value=\"D\">");
+        out.println("       <input type=\"submit\" style=\"" + ButtonStyle + "\" name=\"key\" value=\".\">");
         out.println("       <input type=\"submit\" style=\"" + ButtonStyle + "\" name=\"key\" value=\"=\">");
         out.println("   </form>");
 
