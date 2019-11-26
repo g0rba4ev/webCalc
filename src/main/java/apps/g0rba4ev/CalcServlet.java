@@ -41,7 +41,7 @@ public class CalcServlet extends HttpServlet {
     /**
      * html-style for calculator's buttons
      */
-    private static final String ButtonStyle = "height: 40px; width: 40px;";
+    private static final String BUTTON_STYLE = "height: 40px; width: 40px;";
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -193,30 +193,30 @@ public class CalcServlet extends HttpServlet {
         out.println("   </p>");
 
         out.println("   <form action=/calculator>");
-        out.println("       <input type=\"submit\" style=\"" + ButtonStyle + "\" name=\"key\" value=CE>");
-        out.println("       <input type=\"submit\" style=\"" + ButtonStyle + "\" name=\"key\" value=\"C\">");
-        out.println("       <input type=\"submit\" style=\"" + ButtonStyle + "\" name=\"key\" value=\"D\">");
-        out.println("       <input type=\"submit\" style=\"" + ButtonStyle + "\" name=\"key\" value=\"/\">");
+        out.println("       <input type=\"submit\" style=\"" + BUTTON_STYLE + "\" name=\"key\" value=CE>");
+        out.println("       <input type=\"submit\" style=\"" + BUTTON_STYLE + "\" name=\"key\" value=\"C\">");
+        out.println("       <input type=\"submit\" style=\"" + BUTTON_STYLE + "\" name=\"key\" value=\"D\">");
+        out.println("       <input type=\"submit\" style=\"" + BUTTON_STYLE + "\" name=\"key\" value=\"/\">");
         out.println("       <br />");
-        out.println("       <input type=\"submit\" style=\"" + ButtonStyle + "\" name=\"key\" value=\"7\">");
-        out.println("       <input type=\"submit\" style=\"" + ButtonStyle + "\" name=\"key\" value=\"8\">");
-        out.println("       <input type=\"submit\" style=\"" + ButtonStyle + "\" name=\"key\" value=\"9\">");
-        out.println("       <input type=\"submit\" style=\"" + ButtonStyle + "\" name=\"key\" value=\"*\">");
+        out.println("       <input type=\"submit\" style=\"" + BUTTON_STYLE + "\" name=\"key\" value=\"7\">");
+        out.println("       <input type=\"submit\" style=\"" + BUTTON_STYLE + "\" name=\"key\" value=\"8\">");
+        out.println("       <input type=\"submit\" style=\"" + BUTTON_STYLE + "\" name=\"key\" value=\"9\">");
+        out.println("       <input type=\"submit\" style=\"" + BUTTON_STYLE + "\" name=\"key\" value=\"*\">");
         out.println("       <br  />");
-        out.println("       <input type=\"submit\" style=\"" + ButtonStyle + "\" name=\"key\" value=\"5\">");
-        out.println("       <input type=\"submit\" style=\"" + ButtonStyle + "\" name=\"key\" value=\"6\">");
-        out.println("       <input type=\"submit\" style=\"" + ButtonStyle + "\" name=\"key\" value=\"4\">");
-        out.println("       <input type=\"submit\" style=\"" + ButtonStyle + "\" name=\"key\" value=\"-\">");
+        out.println("       <input type=\"submit\" style=\"" + BUTTON_STYLE + "\" name=\"key\" value=\"5\">");
+        out.println("       <input type=\"submit\" style=\"" + BUTTON_STYLE + "\" name=\"key\" value=\"6\">");
+        out.println("       <input type=\"submit\" style=\"" + BUTTON_STYLE + "\" name=\"key\" value=\"4\">");
+        out.println("       <input type=\"submit\" style=\"" + BUTTON_STYLE + "\" name=\"key\" value=\"-\">");
         out.println("       <br />");
-        out.println("       <input type=\"submit\" style=\"" + ButtonStyle + "\" name=\"key\" value=\"1\">");
-        out.println("       <input type=\"submit\" style=\"" + ButtonStyle + "\" name=\"key\" value=\"2\">");
-        out.println("       <input type=\"submit\" style=\"" + ButtonStyle + "\" name=\"key\" value=\"3\">");
-        out.println("       <input type=\"submit\" style=\"" + ButtonStyle + "\" name=\"key\" value=\"+\">");
+        out.println("       <input type=\"submit\" style=\"" + BUTTON_STYLE + "\" name=\"key\" value=\"1\">");
+        out.println("       <input type=\"submit\" style=\"" + BUTTON_STYLE + "\" name=\"key\" value=\"2\">");
+        out.println("       <input type=\"submit\" style=\"" + BUTTON_STYLE + "\" name=\"key\" value=\"3\">");
+        out.println("       <input type=\"submit\" style=\"" + BUTTON_STYLE + "\" name=\"key\" value=\"+\">");
         out.println("       <br />");
-        out.println("       <input type=\"submit\" style=\"" + ButtonStyle + "\" name=\"key\" value=\"+/-\">");
-        out.println("       <input type=\"submit\" style=\"" + ButtonStyle + "\" name=\"key\" value=\"0\">");
-        out.println("       <input type=\"submit\" style=\"" + ButtonStyle + "\" name=\"key\" value=\".\">");
-        out.println("       <input type=\"submit\" style=\"" + ButtonStyle + "\" name=\"key\" value=\"=\">");
+        out.println("       <input type=\"submit\" style=\"" + BUTTON_STYLE + "\" name=\"key\" value=\"+/-\">");
+        out.println("       <input type=\"submit\" style=\"" + BUTTON_STYLE + "\" name=\"key\" value=\"0\">");
+        out.println("       <input type=\"submit\" style=\"" + BUTTON_STYLE + "\" name=\"key\" value=\".\">");
+        out.println("       <input type=\"submit\" style=\"" + BUTTON_STYLE + "\" name=\"key\" value=\"=\">");
         out.println("   </form>");
 
         out.println("</body>");
