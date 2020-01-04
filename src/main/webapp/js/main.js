@@ -1,6 +1,6 @@
 function sendAjaxToServlet(pressedKey) {
     $.ajax({
-        url : "/webCalc_war/doCalc",
+        url : "/calculator/doCalc",
         data : {
             key : pressedKey
         },
