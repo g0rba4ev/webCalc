@@ -1,4 +1,4 @@
-package apps.g0rba4ev;
+package apps.g0rba4ev.servlets.servlet;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

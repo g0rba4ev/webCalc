@@ -4,8 +4,8 @@
 
 <head>
     <title>Calculator</title>
-    <script src="js/jquery.js"></script>
-    <script src="js/main.js"></script>
+    <script src="${pageContext.request.contextPath}/js/jquery.js"></script>
+    <script src="${pageContext.request.contextPath}/js/main.js"></script>
 </head>
 
 <body>
@@ -40,6 +40,9 @@
 <input id="btn_0" type="button" onclick="sendAjaxToServlet(this.value)" style="height: 40px; width: 40px;" name="key" value="0">
 <input id="btn_." type="button" onclick="sendAjaxToServlet(this.value)" style="height: 40px; width: 40px;" name="key" value=".">
 <input id="btn_=" type="button" onclick="sendAjaxToServlet(this.value)" style="height: 40px; width: 40px;" name="key" value="=">
+<br>
+
+<a href="logout">Logout</a>
 
 
 </body>
