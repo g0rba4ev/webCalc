@@ -9,10 +9,12 @@ import java.io.IOException;
 
 @WebFilter(filterName = "Filter", urlPatterns = "/doCalc")
 public class FilterOtherPages implements javax.servlet.Filter {
+
     public void destroy() {
     }
 
-    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws ServletException, IOException {
+    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
+            throws ServletException, IOException {
 
         final HttpServletRequest req = (HttpServletRequest) request;
         final HttpServletResponse res = (HttpServletResponse) response;
@@ -30,7 +32,6 @@ public class FilterOtherPages implements javax.servlet.Filter {
     }
 
     public void init(FilterConfig config) throws ServletException {
-
     }
 
 }
