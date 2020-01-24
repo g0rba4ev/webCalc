@@ -42,13 +42,16 @@ public class AuthFilter implements Filter {
 
         } else if(login != null && password != null){
 
-            DB database = DB.getInstance();
+            DB database = new DB();
             User user = database.getUserByLogin(login);
 
             if(user != null && user.getPassword().equals(password)){
                 session.setAttribute("isAuthorized", true);
                 req.getRequestDispatcher("/WEB-INF/view/calculator.jsp").forward(req, res);
             } else {
+                if(user == null){
+                    database.addUser(login, password);
+                }
                 req.getRequestDispatcher("/WEB-INF/view/login.jsp").forward(req, res);
             }
 

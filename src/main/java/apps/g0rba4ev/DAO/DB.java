@@ -2,105 +2,103 @@ package apps.g0rba4ev.DAO;
 
 import apps.g0rba4ev.model.User;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 public class DB {
 
-    private static DB instance;
+    String DB_URL = "jdbc:hsqldb:file:../testDB/testDB;ifexists=true";
+    String DB_User = "SA";
+    String DB_Password = "";
+    String DB_Driver = "org.hsqldb.jdbcDriver";
 
-    private Connection conn;
+    /**
+     * Constructor for default DB
+     */
+    public DB(){
 
-    private DB() {
+    }
+
+    public DB(String DB_URL, String DB_User, String DB_Password, String DB_Driver) {
+        this.DB_URL = DB_URL;
+        this.DB_User = DB_User;
+        this.DB_Password = DB_Password;
+        this.DB_Driver = DB_Driver;
+    }
+
+    public void addUser(final String login, final String password) {
+        Connection conn = null;
+        PreparedStatement statement = null;
+
+        loadDriver();
+
         try {
+            conn = DriverManager.getConnection(DB_URL, DB_User, DB_Password);
 
-            Class.forName("org.hsqldb.jdbcDriver");
-        } catch (ClassNotFoundException e) {
+            statement = conn.prepareStatement("INSERT INTO users (login, password) values (?, ?)");
+            statement.setString(1, login);
+            statement.setString(2, password);
+            statement.executeUpdate();
+
+        } catch (SQLException e) {
             e.printStackTrace(System.out);
-        }
-        try {
-
-            String db = "jdbc:hsqldb:file:testDB";
-            String dbUser = "SA";
-            String dbPassword = "";
-
-            conn = DriverManager.getConnection(db, dbUser, dbPassword);
-
-            //init for local DB
+        } finally {
             try{
-                Statement stmt = conn.createStatement();
-
-                stmt.execute("CREATE TABLE USERS(login VARCHAR(20), password VARCHAR(50))");
-                stmt.execute("INSERT INTO users (login, password) values ('admin', 'admin')");
-
-
-                stmt.close();
-            } catch (SQLException e){
-                System.out.println("Error in method DB.getUserByLogin");
+                if(statement != null)
+                    statement.close();
+                if(conn != null)
+                    conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace(System.out);
             }
-        } catch (SQLException e) {
-            e.printStackTrace(System.out);
         }
-    }
-
-    public static DB getInstance(){
-        if (instance == null) {
-            instance = new DB();
-        }
-        return instance;
-    }
-
-    public boolean addUser(final String login, final String password) {
-        try {
-            Statement stmt = conn.createStatement();
-            stmt.executeQuery("INSERT INTO users (login, password) values ('" + login + "', '" + password + "')");
-            stmt.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-
-        return true;
     }
 
     public User getUserByLogin(final String login) {
         User user = null;
+        Connection conn = null;
+        PreparedStatement statement = null;
+        ResultSet rs = null;
+
+        loadDriver();
+
         try {
-            Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery("select * " +
-                    "from USERS " +
-                    "where LOGIN = '" + login + "'");
+
+            conn = DriverManager.getConnection(DB_URL, DB_User, DB_Password);
+            statement = conn.prepareStatement("SELECT * FROM USERS WHERE LOGIN = ?");
+            statement.setString(1, login);
+            rs = statement.executeQuery();
 
             if (rs.next()) {
                 user = new User(login, rs.getString("PASSWORD"));
             }
 
-            rs.close();
-            stmt.close();
-
-
         } catch (SQLException e) {
             e.printStackTrace(System.out);
+        } finally {
+            try{
+                if(rs != null)
+                    rs.close();
+                if(statement != null)
+                    statement.close();
+                if(conn != null)
+                    conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace(System.out);
+            }
         }
+
         return user;
     }
 
-    public static void main(String[] args) {
-
-        DB database = DB.getInstance();
-        database.addUser("Ilya", "Gorbachev");
-        User user = database.getUserByLogin("admin");
-
-        User user1 = database.getUserByLogin("Ilya");
-        if(user != null){
-            System.out.println(user.getLogin());
-            System.out.println(user.getPassword());
+    /**
+     * dynamic load database's driver to the classpath
+     */
+    private void loadDriver(){
+        try {
+            Class.forName(DB_Driver);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace(System.out);
         }
-
-
     }
 
 }
