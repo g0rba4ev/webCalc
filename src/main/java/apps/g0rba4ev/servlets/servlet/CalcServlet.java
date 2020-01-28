@@ -1,5 +1,8 @@
 package apps.g0rba4ev.servlets.servlet;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -39,10 +42,6 @@ public class CalcServlet extends HttpServlet {
      * field for storing current state of calculator
      */
     private State currState = State.W4OP1;
-//    /**
-//     * html-style for calculator's buttons
-//     */
-//    private static final String BUTTON_STYLE = "height: 40px; width: 40px;";
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

@@ -1,6 +1,9 @@
 package apps.g0rba4ev.DAO;
 
 import apps.g0rba4ev.model.User;
+import apps.g0rba4ev.servlets.servlet.CalcServlet;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.sql.*;
 
@@ -11,12 +14,12 @@ public class DB {
     String DB_Password = "";
     String DB_Driver = "org.hsqldb.jdbcDriver";
 
+    private static final Logger log = LoggerFactory.getLogger(DB.class);
+
     /**
      * Constructor for default DB
      */
-    public DB(){
-
-    }
+    public DB(){}
 
     public DB(String DB_URL, String DB_User, String DB_Password, String DB_Driver) {
         this.DB_URL = DB_URL;
@@ -38,6 +41,8 @@ public class DB {
             statement.setString(1, login);
             statement.setString(2, password);
             statement.executeUpdate();
+
+            log.info("Added new user with login {} and password {}", login, password);
 
         } catch (SQLException e) {
             e.printStackTrace(System.out);
